@@ -1,0 +1,48 @@
+# Se o servidor suportar redirecionamento por htaccess
+<IfModule mod_rewrite.c>
+    # Ativa o módulo de redirecionamento
+    RewriteEngine On
+    # Define que o servidor não irá mostrar uma lista de arquivos quando não houver um "index"
+    Options -Indexes
+
+    # Define que a página principal será "/view/home.php"
+    DirectoryIndex view/home.php
+
+    # Redireciona "/cms" para "/cms/home.php" com status 301
+    RewriteCond %{REQUEST_URI} ^(.*)/cms$
+    RewriteRule (.*) %1/cms/home.php [L,R=301]
+
+    # Redireciona "/api/v1/QUALQUER_COISA" para "api.php?request=QUALQUER_COISA"
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^api/v1/(.*)$ api.php?request=$1 [QSA,NC,L]
+
+    # Redireciona "/index.php" para "/view/home.php"
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^index.php$ view/home.php [QSA,NC,L]
+
+    # Redireciona "/cms", "/cms/" e "/cms/index.php" para "/view/cms/home.php"
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^cms(|\/|\/index.php)$ view/cms/home.php [QSA,NC,L]
+
+    # Redireciona "/cms/QUALQUER_COISA.php" para "view/cms/QUALQUER_COISA.php" caso o arquivo exista
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} ^(^.*\/|)cms\/(.*?)\.php$
+    RewriteCond %{DOCUMENT_ROOT}/%1/view/cms/%2.php -f
+    RewriteRule ^cms\/(.*\.php)$ view/cms/$1 [QSA,NC,L]
+
+    # Redireciona "/QUALQUER_COISA.php" para "view/QUALQUER_COISA.php" caso o arquivo exista
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} ^(^.*\/|)(.*?)\.php$
+    RewriteCond %{DOCUMENT_ROOT}/%1/view/%2.php -f
+    RewriteRule ^(.*\.php)$ view/$1 [QSA,NC,L]
+
+    # Página de erro 404
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule .* view/404.php [L]
+</IfModule>

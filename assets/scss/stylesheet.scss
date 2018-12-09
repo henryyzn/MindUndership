@@ -1,0 +1,59 @@
+@import 'mixins.scss';
+@import 'colors.scss';
+
+*, html, body{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: $black;
+    position: relative;
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+// Genéricos
+.main{
+    width: 100%;
+    max-width: 1500px;
+    height: auto;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// Index
+#index-header-wrapper{
+    width: 100%;
+    max-width: 100vw;
+    display: flex;
+    flex-direction: row;
+    section{
+        width: 100%;
+        max-width: 700px;
+        background-color: $white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        >h2{
+            @include texto(4rem, $black, 'Roboto Bold', 4.2rem, left);
+        }
+        >h3{
+            @include texto(2rem, $black, 'Roboto Italic', 2.8rem, left);
+        }
+        >p{
+            @include texto(1.2rem, $black, 'Roboto Regular', 1.5rem, left);
+        }
+    }
+    figure{
+        width: 100%;
+        max-width: 100%;
+        background-color: $black;
+        padding: 0;
+        img{
+            @include img-fit(100%, 500px);
+        }
+    }
+}

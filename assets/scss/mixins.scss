@@ -1,0 +1,52 @@
+$shadow: 3px 12px 45px -2px rgba(0,0,0,0.3);
+$shadowlight: 3px 12px 45px -2px rgba(0,0,0,0.05);
+
+@mixin img-fit($w, $h){
+	width: $w;
+	height: $h;
+	display: block;
+	object-fit: cover;
+	cursor: pointer;
+}
+@mixin display(
+	$display: false,
+	$flexdirection: false,
+	$justifycontent: false,
+	$alignitems: false){
+		@if $display { display: $display; } @else { display: block; }
+		@if $flexdirection { flex-direction: $flexdirection; } @else { flex-direction: row; }
+		@if $justifycontent { justify-content: $justifycontent; } @else { justify-content: flex-start; }
+		@if $alignitems { align-items: $alignitems; } @else { align-items: flex-start; }
+}
+@mixin bloco(
+	$width: false,
+	$maxwidth: false,
+	$height: false,
+	$minheight: false){
+		@if $width { width: $width; } @else { width: auto; }
+		@if $maxwidth { max-width: $maxwidth; } @else { max-width: 100%; }
+		@if $height { height: $height; } @else { height: auto; }
+		@if $minheight { min-height: $minheight; } @else { min-height: auto; }
+}
+@mixin position($position, $top: null, $right: null, $bottom: null, $left: null) {
+	@if $position { position: $position; } @else { position: absolute; }
+	@if $top { top: $top; }
+	@if $right { right: $right; }
+    @if $bottom { bottom: $bottom; }
+    @if $left { left: $left; }
+}
+@mixin texto(
+    $size: false,
+    $color: false,
+    $family: false,
+    $lh: false,
+    $align: false) {
+        font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+        @if $size { font-size: $size; } @else { font-size: 18px; }
+        @if $color { color: $color; } @else { color: $darkgrey; }
+        @if $family { font-family: $family; } @else { font-family: 'Roboto Regular'; }
+        @if $lh { line-height: $lh; } @else { line-height: 21px; }
+        @if $align { text-align: $align; } @else { text-align: left; }
+        display: block;
+        text-decoration: none;
+}

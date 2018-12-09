@@ -1,0 +1,141 @@
+@import 'mixins.scss';
+@import 'colors.scss';
+
+#navbar{
+    width: 100%;
+    height: 70px;
+    background: $darkgrey;
+    position: fixed;
+    z-index: 99999;
+    display: flex;
+    #menu-button{
+        width: 70px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        img{
+            width: 38px;
+            height: 38px;
+            display: block;
+            object-fit: cover;
+            cursor: pointer;
+        }
+    }
+    #navbar-title{
+        color: $white;
+        font-family: 'Roboto Bold', sans-serif;
+        font-size: 25px;
+        line-height: 70px;
+        position: absolute;
+        left: 70px;
+        top: 0px;
+        cursor: pointer;
+        transition: 500ms ease-in-out;
+        &:hover{
+            color: $salmon;
+        }
+    }
+    #menu-avatar{
+        width: 70px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        img{
+            width: 38px;
+            height: 38px;
+            display: block;
+            object-fit: cover;
+            cursor: pointer;
+        }
+    }
+    #menu-search{
+        width: 32px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 68px;
+        top: 0px;
+        img{
+            width: 24px;
+            height: 24px;
+            display: block;
+            object-fit: cover;
+            cursor: pointer;
+        }
+    }
+}
+.sidebar {
+    @include bloco(100%, 300px, 100%);
+    background-color: $white;
+    box-sizing: border-box;
+    overflow-y: auto;
+    box-shadow: 0px 0px 72px 10px rgba(0,0,0,0.1);
+    transition: width 500ms;
+    flex-shrink: 0;
+    z-index: 999;
+    margin-top: 70px;
+    position: absolute;
+}
+.sidebar.hide-right{
+    display: none;
+    top: 0;
+    right: 0;
+}
+.sidebar.hide-left{
+    display: none;
+    top: 0;
+    left: 0;
+}
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+.sidebar nav a {
+    @include texto(16px, $darkgrey, 'Roboto Bold');
+    height: 50px;
+    padding: 0px 0px 2px 0px;
+    position: relative;
+    transition: 100ms ease-in-out;
+}
+
+.sidebar nav a::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.sidebar nav a.active, #sidebar nav a:hover {
+    background-color: #ededed;
+}
+
+.sidebar nav .image {
+    @include bloco($width: 50px, $height: 50px);
+    @include display(flex, row, center, center);
+    margin-left: 5px;
+}
+
+.sidebar nav .label {
+    @include texto(18px, $darkgrey, 'Roboto Medium');
+    @include display(flex, row, $alignitems: center, $justifycontent: null);
+    @include position(absolute, 2px, $left: 50px, $right: null, $bottom: null);
+    height: 50px;
+    padding-top: 1.5px;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: width 500ms, color 300ms;
+}
+
+.sidebar nav .badge {
+    @include texto(18px, $grey, 'Roboto Regular');
+    position: absolute;
+    right: 10px;
+}
